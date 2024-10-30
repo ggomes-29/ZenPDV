@@ -1,0 +1,45 @@
+Option Compare Database
+Dim VarTecla
+
+Private Sub btnConfirmarAbertura_Click()
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
+
+    Set db = CurrentDb
+    Set rs = db.OpenRecordset("tbl_Turnos", dbOpenDynaset)
+
+    rs.AddNew
+    rs!DataAbertura = Date
+    rs!HoraAbertura = Time
+    rs!valorInicial = Me.txtValorInicial.Value
+    rs!statusAberto = True
+    rs.Update
+    rs.Close
+    
+    ' Atualiza a caixa de seleção para mostrar que o turno está aberto
+    Me.statusAberto.Value = True
+    
+    ' Abre o formulário do PDV após a abertura do caixa
+    DoCmd.OpenForm "frm_PDV"
+    DoCmd.Close acForm, Me.Name ' Fecha o formulário de abertura de caixa
+End Sub
+
+Private Sub Form_KeyPress(KeyAscii As Integer)
+    If KeyAscii = 32 Then
+    VarTecla = 1
+    End If
+End Sub
+
+Private Sub btSair_Click()
+
+    DoCmd.Close
+    DoCmd.OpenForm "frm_MenuPDV"
+End Sub
+
+
+Private Sub Form_Load()
+
+    Me!btSair.Picture = CurrentProject.Path & "\Imagens\Botoes\Fechar.png"
+    Me!btnConfirmarAbertura.Picture = CurrentProject.Path & "\Imagens\Botoes\abrirCX.png"
+    End Sub
+
