@@ -1,0 +1,42 @@
+Option Compare Database
+
+Private Sub btClie_Click()
+    strFormOrigem = "Cadastros"
+    DoCmd.Close
+    DoCmd.OpenForm "frm_CadClientes"
+    
+End Sub
+
+Private Sub btFormPag_Click()
+DoCmd.Close
+DoCmd.OpenForm "frm_CadFormPag"
+End Sub
+
+Private Sub btForn_Click()
+    DoCmd.Close
+    DoCmd.OpenForm "frm_CadFornecedores"
+End Sub
+
+Private Sub btprod_Click()
+    strFormOrigem = "Cadastros"
+    DoCmd.Close
+    DoCmd.OpenForm "frm_Cadproduto"
+End Sub
+
+Private Sub btSair_Click()
+        DoCmd.Close
+        DoCmd.OpenForm "frm_Principal"
+End Sub
+
+Private Sub btVend_Click()
+    DoCmd.Close
+        DoCmd.OpenForm "frm_Vendedores"
+End Sub
+
+Private Sub Form_Load()
+    Me!btprod.Picture = CurrentProject.Path & "\Imagens\Botoes\Cadastro.png"
+    Me!btClie.Picture = CurrentProject.Path & "\Imagens\Botoes\Clientes.png"
+    Me!btFormPag.Picture = CurrentProject.Path & "\Imagens\Botoes\FormasPgm.png"
+    Me!btSair.Picture = CurrentProject.Path & "\Imagens\Botoes\Fechar.png"
+    Me!btForn.Picture = CurrentProject.Path & "\Imagens\Botoes\Fornecedores.png"
+End Sub
