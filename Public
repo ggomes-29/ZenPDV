@@ -1,0 +1,47 @@
+Option Compare Database
+Public origemCadastroProduto As String
+Public origemCadastroCliente As String
+Public origemCadastroCategoria As String
+Public origemCadastroFornecedor As String
+Public strFormOrigem As String
+Public codVendaAtual As Long
+Public strFormOrigemPDV As String
+Public infosalvasConfig As String
+
+
+Function ObterNomeEmpresa() As String
+    Dim db As DAO.Database
+    Dim rs As DAO.Recordset
+    Dim NomeEmpresa As String
+
+    Set db = CurrentDb
+    Set rs = db.OpenRecordset("SELECT ValorTexto FROM tbl_Config WHERE NomeCampo = 'txtNomeEmpresa'", dbOpenDynaset)
+
+    If Not rs.EOF Then
+        NomeEmpresa = rs!ValorTexto
+    Else
+        NomeEmpresa = "Minha Empresa" ' Um valor padrão caso não encontre
+    End If
+
+    rs.Close
+    Set rs = Nothing
+    Set db = Nothing
+
+    ObterNomeEmpresa = NomeEmpresa
+End Function
+
+Function NomeEmpresa() As String
+    NomeEmpresa = DLookup("ValorTexto", "tbl_Config", "NomeCampo = 'txtNomeEmpresa'")
+End Function
+Function EnderecoEmpresa() As String
+    EnderecoEmpresa = DLookup("ValorTexto", "tbl_Config", "NomeCampo = 'txtEndereçoEmpresa'")
+End Function
+Function TelEmpresa() As String
+    TelEmpresa = DLookup("ValorTexto", "tbl_Config", "NomeCampo = 'txtTelefoneEmpresa'")
+End Function
+Function CNPJEmpresa() As String
+    CNPJEmpresa = DLookup("ValorTexto", "tbl_Config", "NomeCampo = 'txtCNPJ'")
+End Function
+
+
+
